@@ -68,6 +68,7 @@ function App() {
 
   useEffect(() => {
     passwordGenerator();
+    setcopy('copy')
   }, [length, number, character, passwordGenerator]);
 
 
