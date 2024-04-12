@@ -41,7 +41,7 @@ function App() {
 
   return (
     <>
-      <h1>hello react </h1>
+      <h1>hello react {counter} </h1>
 
       <h2>counter value {counter}</h2>
 
@@ -51,6 +51,10 @@ function App() {
       <br />
 
       <button onClick={removevalue}>remove value</button>
+
+      <button onClick={()=> setcounter(3)}>add </button>
+
+      <input type="range" max={30} min={6} onChange={(e)=> setcounter(e.target.value) } /> range {counter} 
 
 
       <h1>final result {counter}</h1>
