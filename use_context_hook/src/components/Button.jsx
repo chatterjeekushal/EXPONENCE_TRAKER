@@ -13,7 +13,7 @@ function Button() {
   return (
     <div>
 
-<button onClick={()=>{value.setCount((count)=> count+1)}}>i am a button  <span><Compo/></span></button>
+<button onClick={()=>value.setCount((prev)=>prev+1)}>i am a button  <span><Compo/></span></button>
         
     </div>
   )
