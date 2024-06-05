@@ -1,0 +1,107 @@
+
+*{
+    box-sizing: border-box;
+    margin:0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+.navbar {
+    display: flex;
+
+    width: 90vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.navmanub {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    list-style: none;
+
+}
+
+.brandname {
+    font-size: 1.5rem;
+}
+
+.navmanu li {
+    font-size: 1.2rem;
+}
+
+.active {
+    display: none;
+}
+
+.icon {
+    display: none;
+}
+
+.navmanuc {
+    display: none;
+}
+
+body {
+    overflow-x: hidden;
+  }
+
+@media only screen and (max-width: 600px) {
+
+    .navbar {
+        background-color: green;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .navmanub {
+        display: none;
+    }
+
+    .navmanuc {
+        position: absolute;
+        top: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        background-color: red;
+        width: 70vw;
+        transform: translateX(30rem);
+
+    }
+
+
+
+    .icon {
+
+        margin-left: 2rem;
+        display: block;
+    }
+
+    .navmanuactive{
+
+        position:absolute;
+        top: 80px;
+    
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        background-color: red;
+        width: 70vw;
+        transform: translateX(0rem);
+        list-style: none;
+        transition: all 0.5s ease-in;
+        transition-duration: 300;
+    }
+
+    body {
+        overflow-x: hidden;
+      }
+
+}
