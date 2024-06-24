@@ -9,7 +9,7 @@ function Profile() {
 
     if (!user) return <div> plese login </div> 
 
-    return <div> welcome {user.myuser} my job {job} </div>
+    return <div> welcome {user.myuser}  my job {job} mypassword {user.mypassword} </div>
 
 }
 

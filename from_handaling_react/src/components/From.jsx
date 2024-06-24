@@ -12,6 +12,8 @@ function Form() {
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
 
+        console.log(name,value,type,checked);
+
         if (type === 'checkbox') {
             setData(prevData => {
                 if (checked) {
@@ -26,7 +28,7 @@ function Form() {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        
         localStorage.setItem('Userdata', JSON.stringify(data));
     };
 
@@ -38,33 +40,40 @@ function Form() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Username</label>
+        <div className="flex justify-center items-center h-screen bg-gray-100">
+            <form onSubmit={handleSubmit} className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
+                <div className="mb-4">
+                    <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Username</label>
                     <input
                         type="text"
                         placeholder='Enter your name'
                         value={data.name}
                         name='name'
                         onChange={handleChange}
+                        className="w-full px-3 py-2 border rounded-lg"
                     />
                 </div>
 
-                <div>
-                    <label htmlFor="email">Email</label>
+                <div className="mb-4">
+                    <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email</label>
                     <input
                         type="email"
                         placeholder='Enter your email'
                         value={data.email}
                         name='email'
                         onChange={handleChange}
+                        className="w-full px-3 py-2 border rounded-lg"
                     />
                 </div>
 
-                <div>
-                    <label htmlFor="occupation">Occupation</label>
-                    <select name="occupation" onChange={handleChange} value={data.occupation}>
+                <div className="mb-4">
+                    <label htmlFor="occupation" className="block text-gray-700 font-bold mb-2">Occupation</label>
+                    <select
+                        name="occupation"
+                        onChange={handleChange}
+                        value={data.occupation}
+                        className="w-full px-3 py-2 border rounded-lg"
+                    >
                         <option value="">--select--</option>
                         <option value="student">Student</option>
                         <option value="employee">Employee</option>
@@ -72,77 +81,80 @@ function Form() {
                     </select>
                 </div>
 
-                <div>
-                    <label>Gender</label>
-                    <div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 font-bold mb-2">Gender</label>
+                    <div className="flex items-center mb-2">
                         <input
                             type="radio"
                             name="gender"
                             value="male"
                             onChange={handleChange}
-                            checked={data.gender === "male"}
+                            className="mr-2"
                         />
-                        <label htmlFor="male">Male</label>
+                        <label htmlFor="male" className="text-gray-700">Male</label>
                     </div>
-                    <div>
+                    <div className="flex items-center mb-2">
                         <input
                             type="radio"
                             name="gender"
                             value="female"
                             onChange={handleChange}
-                            checked={data.gender === "female"}
+                            className="mr-2"
                         />
-                        <label htmlFor="female">Female</label>
+                        <label htmlFor="female" className="text-gray-700">Female</label>
                     </div>
-                    <div>
+                    <div className="flex items-center">
                         <input
                             type="radio"
                             name="gender"
                             value="other"
                             onChange={handleChange}
-                            checked={data.gender === "other"}
+                            className="mr-2"
                         />
-                        <label htmlFor="other">Other</label>
+                        <label htmlFor="other" className="text-gray-700">Other</label>
                     </div>
                 </div>
 
-                <div>
-                    <label htmlFor="skills">Skills</label>
-                    <div>
+                <div className="mb-4">
+                    <label htmlFor="skills" className="block text-gray-700 font-bold mb-2">Skills</label>
+                    <div className="flex items-center mb-2">
                         <input
                             type="checkbox"
                             name="skills"
                             value="html"
                             onChange={handleChange}
                             checked={data.skills.includes("html")}
+                            className="mr-2"
                         />
-                        <label htmlFor="html">HTML</label>
+                        <label htmlFor="html" className="text-gray-700">HTML</label>
                     </div>
-                    <div>
+                    <div className="flex items-center mb-2">
                         <input
                             type="checkbox"
                             name="skills"
                             value="css"
                             onChange={handleChange}
                             checked={data.skills.includes("css")}
+                            className="mr-2"
                         />
-                        <label htmlFor="css">CSS</label>
+                        <label htmlFor="css" className="text-gray-700">CSS</label>
                     </div>
-                    <div>
+                    <div className="flex items-center">
                         <input
                             type="checkbox"
                             name="skills"
                             value="javascript"
                             onChange={handleChange}
                             checked={data.skills.includes("javascript")}
+                            className="mr-2"
                         />
-                        <label htmlFor="javascript">JavaScript</label>
+                        <label htmlFor="javascript" className="text-gray-700">JavaScript</label>
                     </div>
                 </div>
 
-                <div>
-                    <button type="submit">Submit</button>
-                    <button type='button' onClick={handleReset}>Reset</button>
+                <div className="flex justify-between">
+                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-700">Submit</button>
+                    <button type='button' onClick={handleReset} className="bg-gray-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700">Reset</button>
                 </div>
             </form>
         </div>
