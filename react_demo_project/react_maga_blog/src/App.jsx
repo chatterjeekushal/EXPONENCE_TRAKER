@@ -1,21 +1,54 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import authservice from './appwright/auth';
+import { login, logout } from './store/authSlice';
 
 import './App.css'
 
 import conf from './conf/conf';
+import { Fooer, Header } from './components';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [Loding, setLoding] = useState(true)
 
-  console.log(conf.appwright_url);
+  const dispatch = useDispatch()
 
-  return (
-    <>
+  useEffect(() => {
 
-      <h1>a blog with appwright</h1>
+    authservice.getCurrentUser()
+      .then((userdata) => {
+        if (userdata) {
+          dispatch(login({ userdata }))
+        }
+        else {
+          dispatch(logout())
+        }
+      })
 
-    </>
+      .finally(() => setLoding(false))
+
+  }, [])
+
+
+
+  return !Loding ? (
+    <div>
+
+      <div>
+        <Header />
+        <main>
+<h1>hello user</h1>
+        </main>
+        <Fooer />
+      </div>
+
+    </div>
+
+
+  ) : (
+    <div> data loding...</div>
   )
+
 }
 
 

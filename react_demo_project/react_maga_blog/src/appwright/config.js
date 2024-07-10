@@ -66,8 +66,6 @@ export class Service {
 
 
 
-
-
     async delete_post(slug) {
 
         try {
@@ -89,9 +87,9 @@ export class Service {
     }
 
 
-    async get_post(slug){
+    async get_post(slug) {
         try {
-            
+
             return await this.Databases.getDocument(
                 conf.appwright_database_id,
                 conf.appwright_collection_id,
@@ -99,11 +97,73 @@ export class Service {
             )
 
         } catch (error) {
-            console.log("get post error",error);
+            console.log("get post error", error);
         }
     }
 
 
+    async all_post(queries = [Query.equal("status", "active")]) {
+
+        try {
+
+            return await this.Databases.listDocuments(
+                conf.appwright_database_id,
+                conf.appwright_collection_id,
+                queries
+            )
+
+        } catch (error) {
+            console.log("all post error", error);
+            return false
+        }
+    }
+
+
+    // file upload service
+
+
+    async uplord_file(file) {
+
+        try {
+
+            return await this.bucket.createFile(
+                conf.appwright_bucket_id,
+                ID.unique(),
+                file,
+            )
+
+        } catch (error) {
+            console.log("upload file error", error);
+        }
+    }
+
+
+    async delete_file(file_id) {
+
+        try {
+
+            return this.bucket.deleteFile(
+                conf.appwright_bucket_id,
+                file_id,
+            )
+            return true
+
+        } catch (error) {
+            console.log("delete file error", error);
+            return false
+        }
+    }
+
+    
+    get_file_preview(file_id){
+
+        return this.bucket.getFilePreview(
+            conf.appwright_bucket_id,
+            file_id
+        )
+    }
+
+    
 
 }
 
