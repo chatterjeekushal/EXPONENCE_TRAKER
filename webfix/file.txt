@@ -1,0 +1,9 @@
+ <ul class="navbar-nav py-4 d-none d-lg-flex">
+
+            <li class="nav-item px-1" ><a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-search h4"></i></a></li>
+            <li class="nav-item px-1"><a class="nav-link" href=""><i class="bi bi-person h4"></i></a></li>
+            <li class="nav-item px-1"><a class="nav-link" href=""><i class="bi bi-heart h4"></i></a></li>
+            <li class="nav-item px-1"><a class="nav-link" href=""><i class="bi bi-bag h4"></i></a></li>
+            
+
+        </ul>
