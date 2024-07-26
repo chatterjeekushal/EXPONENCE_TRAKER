@@ -49,25 +49,25 @@ function Header() {
                         <Link to="/"></Link>
                     </div>
 
-<ul>
-    {navItems.map((item)=>
-    
-    item.active ? (
-        <li key={item.name}>
-            <button onClick={()=>navigate(item.slug)}>{item.name}</button>
-        </li>
-    ):null
+                    <ul>
+                        {navItems.map((item) =>
 
-    )}
+                            item.active ? (
+                                <li key={item.name}>
+                                    <button onClick={() => navigate(item.slug)}>{item.name}</button>
+                                </li>
+                            ) : null
 
-    {authstatus && (
-        
-        <li>
-            <Logoutbtn/>
-        </li>
-        
-        )}
-</ul>
+                        )}
+
+                        {authstatus && (
+
+                            <li>
+                                <Logoutbtn />
+                            </li>
+
+                        )}
+                    </ul>
 
                 </nav>
             </Container>
