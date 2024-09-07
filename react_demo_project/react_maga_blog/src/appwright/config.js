@@ -6,7 +6,7 @@ import { Client, Account, ID, Databases, Storage, Query } from "appwrite";
 
 export class Service {
 
-    client = new client();
+    client = new Client();
     Databases;
     bucket;
 
@@ -169,5 +169,5 @@ export class Service {
 
 const service = new Service()
 
-export default Service
+export default service
 
