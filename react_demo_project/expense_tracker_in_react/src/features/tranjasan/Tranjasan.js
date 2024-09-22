@@ -9,7 +9,6 @@ const initialState = {
         { id: 2, text: "rent", amount: 100 },
         { id: 3, text: "momoes", amount: -200 }
     ]
-
 }
 
 
