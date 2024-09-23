@@ -6,6 +6,9 @@ import { addTranjasan } from '../features/tranjasan/Tranjasan'
 
 import { useContext } from 'react'
 import { countercontext } from '../context/context'
+import  createDocument  from '../appwrite/appdata'
+import { ID } from 'appwrite'
+
 
 function Newtrangasan() {
 
@@ -18,7 +21,7 @@ function Newtrangasan() {
 
 
 
-  const addtranjasanhandaler = (e) => {
+  const addtranjasanhandaler = async (e) => {
 
     e.preventDefault();
 
@@ -26,6 +29,10 @@ function Newtrangasan() {
       // Convert expance to a positive number and format it with a '+' sign
       const formattedExpance = `+${Math.abs(Number(expance))}`;
   
+      // add appwrite database
+   
+      
+
       // Dispatch action with the values
       dispatch(addTranjasan({ input, expance: formattedExpance }));
   
