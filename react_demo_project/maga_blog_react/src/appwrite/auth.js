@@ -1,91 +1,55 @@
-
-import { Account, client, ID } from "appwrite";
+import { Client, Account, ID } from "appwrite";
 import conf from "../conf/conf";
 
-export class Authservice {
-
-    client = new client();
-    account;
-
+class Authservice {
     constructor() {
-
-        this.client
+        this.client = new Client()
             .setEndpoint(conf.appwriteUrl)
-            .setProject(conf.appwriteprojectId)
-
+            .setProject(conf.appwriteprojectId);
+        
         this.account = new Account(this.client);
     }
 
-
     async createAccount({ email, password, name }) {
-
         try {
-
-            const userAccount = await this.account.create(
-
-                ID.unique(),
-                email,
-                password,
-                name
-            )
-
+            const userAccount = await this.account.create(ID.unique(), email, password, name);
             if (userAccount) {
-
-                // call a nathor function
-
-                return this.login({ email, password })
+                return this.login({ email, password });
             }
-
-            else {
-
-                return userAccount
-            }
-
+            return userAccount;
         } catch (error) {
-            throw error
+            console.error("Authservice error (createAccount):", error);
+            throw error;
         }
     }
-
 
     async login({ email, password }) {
-
         try {
-
-            return await this.account.createEmailPasswordSession(email, password)
-
+            return await this.account.createEmailPasswordSession(email, password);
         } catch (error) {
-
-            throw error
+            console.error("Authservice error (login):", error);
+            throw error;
         }
     }
 
-
-    async getcuurrentuser() {
-
+    async getCurrentUser() {
         try {
-
-            return await this.account.get()
+            return await this.account.get();
         } catch (error) {
-            throw error
+            console.error("Authservice error (getCurrentUser):", error);
+            throw error;
         }
-
-        return null;
     }
-
 
     async logout() {
-
         try {
-            
-            return await this.account.deleteSessions()
+            return await this.account.deleteSessions();
         } catch (error) {
-            console.log(error);
-            
+            console.error("Authservice error (logout):", error);
+            throw error;
         }
     }
-
 }
 
 const authservice = new Authservice();
-
-export default Authservice
+export default authservice;
