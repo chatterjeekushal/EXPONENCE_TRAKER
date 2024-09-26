@@ -121,4 +121,5 @@ class Service {
 }
 
 const serviceInstance = new Service();
+
 export default serviceInstance;
