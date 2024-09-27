@@ -8,10 +8,11 @@ import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
 import Postcard from "./Postcard";
+import RTE from "./RTE";
 
 
 export {
     
-    Header, Footer, Container,Logoutbtn,Logo,Button,Input,Select,Postcard
+    Header, Footer, Container,Logoutbtn,Logo,Button,Input,Select,Postcard,RTE
 
 }
