@@ -10,7 +10,7 @@ import { countercontext } from './context/context'
 
 
 function App() {
-  const [useramount, setuseramount] = useState(500)
+  const [useramount, setuseramount] = useState(0)
 
   return (
     <>

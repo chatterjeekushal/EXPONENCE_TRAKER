@@ -38,6 +38,10 @@ const NewTransaction = () => {
     e.preventDefault();
     
     const parsedAmount = Number.parseInt(amount, 10);
+
+
+    
+
     
     if (input && !isNaN(parsedAmount) && currentUser) {
       try {
@@ -46,6 +50,7 @@ const NewTransaction = () => {
           text: input,
           amount: parsedAmount,
           status: true,
+          userblance: userAmountContext.useramount+Number.parseInt(amount, 10),
         });
 
         console.log("Post data:", postData);
