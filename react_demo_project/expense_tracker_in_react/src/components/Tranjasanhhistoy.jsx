@@ -1,46 +1,32 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeTranjasan } from '../features/tranjasan/Tranjasan';
+import { useSelector } from 'react-redux';
 
-function Tranjasanhhistoy() {
+function TranjasanHistory() {
     const tranjasans = useSelector(state => state.tranjasans);
-    const dispatch = useDispatch();
+    // console.log("tranjasans", tranjasans);
+
+    // Check if tranjasans.tranjashan_data exists and is an array
+    const tranjasanData = tranjasans.tranjashan_data || [];
+
+    console.log("hello");
+    
 
     return (
-        <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-lg mt-4">
-            <div className="text-gray-800 text-lg font-semibold mb-4">Transaction History</div>
-            <ul className="space-y-2">
-                {tranjasans.map((tran) => {
-                    // Ensure tran.amount is a string and trim any extra spaces
-                    const amountStr = String(tran.amount).trim();
-                    
-                    // Determine background color based on amount
-                    const bgColorClass = amountStr.startsWith('+') ? 'bg-green-100' : 'bg-red-100';
-                    
-                    return (
-                        <li
-                            key={tran.id}
-                            className={`flex items-center justify-between p-2 border-b border-gray-200 ${bgColorClass}`}
-                        >
-                            <div>
-                                <p className="text-gray-800 font-semibold">{tran.text}</p>
-                                <p className="text-gray-600">{amountStr}</p>
-                            </div>
-                            <button
-                                onClick={() => {
-                                    dispatch(removeTranjasan(tran.id));
-                                    console.log(tran.id, "tran id");
-                                }}
-                                className="text-red-500 hover:text-red-700"
-                            >
-                                Delete
-                            </button>
-                        </li>
-                    );
-                })}
-            </ul>
-        </div>
+        <div className="p-6 bg-gray-100 rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold text-center mb-6">Tranjasan History</h1>
+        {tranjasanData?.map((tranjasan, index) => (
+            <div key={index} className={`mb-4 p-4 rounded-lg shadow-md ${tranjasan.exstatus ? 'bg-green-200' : 'bg-red-200'}`}>
+                <h2 className="text-xl font-semibold">{tranjasan.exponencename}</h2>
+                <p className="text-lg">₹{tranjasan.exponenceamount}</p>
+                <span className={`inline-block mt-2 px-2 py-1 text-xs font-bold text-white rounded-full ${tranjasan.exstatus ? 'bg-green-500' : 'bg-red-500'}`}>
+                    {tranjasan.exstatus ? 'Add money' : 'Reduce money'}
+                </span>
+            </div>
+        ))}
+        
+    </div>
+    
     );
 }
 
-export default Tranjasanhhistoy;
+export default TranjasanHistory;
