@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
+import { Typography, Box } from '@mui/material';
 function TranjasanHistory() {
     const tranjasans = useSelector(state => state.tranjasans);
     // console.log("tranjasans", tranjasans);
@@ -12,18 +12,30 @@ function TranjasanHistory() {
     
 
     return (
-        <div className="p-6 bg-gray-100 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-center mb-6">Tranjasan History</h1>
-        {tranjasanData?.map((tranjasan, index) => (
-            <div key={index} className={`mb-4 p-4 rounded-lg shadow-md ${tranjasan.exstatus ? 'bg-green-200' : 'bg-red-200'}`}>
-                <h2 className="text-xl font-semibold">{tranjasan.exponencename}</h2>
-                <p className="text-lg">₹{tranjasan.exponenceamount}</p>
-                <span className={`inline-block mt-2 px-2 py-1 text-xs font-bold text-white rounded-full ${tranjasan.exstatus ? 'bg-green-500' : 'bg-red-500'}`}>
-                    {tranjasan.exstatus ? 'Add money' : 'Reduce money'}
-                </span>
-            </div>
-        ))}
-        
+        <div className="p-6 bg-gray-100 rounded-lg shadow-lg max-w-3xl mx-auto">
+        <Typography variant="h3" align="center" gutterBottom>
+        Transaction History
+        </Typography>
+        <div className="h-96 overflow-y-auto">
+            {tranjasanData?.map((tranjasan, index) => (
+              
+        <Box
+        className={`mb-4 p-6 rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${tranjasan.exstatus ? 'bg-green-300' : 'bg-red-300'}`}
+    >
+        <Typography variant="h5" className="font-semibold text-gray-800">
+            {tranjasan.exponencename}
+        </Typography>
+        <Typography variant="h6" className="text-gray-600">
+            ₹{tranjasan.exponenceamount}
+        </Typography>
+        <span
+            className={`inline-block mt-3 px-3 py-1 text-xs font-bold text-white rounded-full ${tranjasan.exstatus ? 'bg-green-800' : 'bg-red-800'}`}
+        >
+            {tranjasan.exstatus ? 'Add Money' : 'Reduce Money'}
+        </span>
+    </Box>
+            ))}
+        </div>
     </div>
     
     );

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { login as authLogin } from '../features/tranjasan/Tranjasan';
 import { useForm } from 'react-hook-form';
 import authservice from '../appwrite/auth';
+import { TextField, Button } from '@mui/material';
 
 function Signup() {
     const navigate = useNavigate();
@@ -39,40 +40,51 @@ function Signup() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit(signup)}>
-                <label htmlFor="fullname">Full Name</label>
-                <input
-                    type="text"
-                    name="fullname"
-                    id="fullname"
-                    placeholder='Full Name'
-                    {...register('fullname', { required: true })}
-                />
+        (
+            <div className="max-w-md mx-auto p-4">
 
-                <label htmlFor="email">Email</label>
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder='Email'
-                    {...register('email', { required: true })}
-                />
+                <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
 
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder='Password'
-                    {...register('password', { required: true })}
-                />
-
-                <button type="submit">Create Account</button>
-
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-            </form>
-        </div>
+                <form onSubmit={handleSubmit(signup)} className="space-y-4">
+                    <TextField
+                        label="Full Name"
+                        variant="outlined"
+                        fullWidth
+                        {...register('fullname', { required: true })}
+                        className="border border-gray-300"
+                    />
+    
+                    <TextField
+                        label="Email"
+                        type="email"
+                        variant="outlined"
+                        fullWidth
+                        {...register('email', { required: true })}
+                        className="border border-gray-300"
+                    />
+    
+                    <TextField
+                        label="Password"
+                        type="password"
+                        variant="outlined"
+                        fullWidth
+                        {...register('password', { required: true })}
+                        className="border border-gray-300"
+                    />
+    
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className="w-full"
+                    >
+                        Create Account
+                    </Button>
+    
+                    {error && <p className="text-red-500">{error}</p>}
+                </form>
+            </div>
+        )    
     );
 }
 

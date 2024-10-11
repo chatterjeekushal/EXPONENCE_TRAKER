@@ -5,12 +5,14 @@ import { countercontext } from '../context/context';
 import { useNavigate } from 'react-router-dom';
 import serviceInstance from '../appwrite/appdata';
 import authservice from '../appwrite/auth';
+import { TextField, Button, Box } from '@mui/material';
 
 
 const NewTransaction = () => {
   const [input, setInput] = useState('');
   const [amount, setAmount] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
+  const [userblance, setUserblance] = useState(0);
   
   
   const dispatch = useDispatch();
@@ -27,6 +29,7 @@ const NewTransaction = () => {
         const listDocument = await serviceInstance.listDocuments("userID", user.$id);
         // console.log("List document:", listDocument);
         dispatch(addTranjashan(listDocument.documents));
+        
       }
 
     };
@@ -40,17 +43,19 @@ const NewTransaction = () => {
     const parsedAmount = Number.parseInt(amount, 10);
 
 
-    
-
-    
     if (input && !isNaN(parsedAmount) && currentUser) {
+
+
+      const blancelist=await serviceInstance.listDocuments("userID", currentUser.$id);
+      
+
       try {
         const postData = await serviceInstance.createPost({
           id: currentUser.$id,
           text: input,
           amount: parsedAmount,
           status: true,
-          userblance: userAmountContext.useramount+Number.parseInt(amount, 10),
+          userblance:null,
         });
 
         console.log("Post data:", postData);
@@ -60,9 +65,6 @@ const NewTransaction = () => {
         const listDocument = await serviceInstance.listDocuments("userID", currentUser.$id);
         // console.log("List document:", listDocument);
         dispatch(addTranjashan(listDocument.documents));
-
-        console.log("rana");
-        
 
 
         // Clear inputs after adding transaction
@@ -113,47 +115,48 @@ const NewTransaction = () => {
 
 
   return (
-    <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-lg mt-4">
-      <div className="mb-4">
-        <p className="text-gray-600 mb-4">Balance: {userAmountContext.useramount}</p>
-        <form className="space-y-4">
-          <div>
-            <input
-              type="text"
-              placeholder="Enter description"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="border border-gray-300 rounded-lg p-2 w-full"
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              placeholder="Enter amount"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="border border-gray-300 rounded-lg p-2 w-full"
-            />
-          </div>
-          <div className="flex gap-2">
-            <button
-              type="submit"
-              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
-              onClick={addTransactionHandler}
-            >
-              Add Income
-            </button>
-            <button
-              type="button"
-              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-              onClick={exTransactionHandler}
-            >
-              Add Expense
-            </button>
-          </div>
-        </form>
+    <Box className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-lg mt-4">
+    <form className="space-y-4">
+      <div>
+        <TextField
+          label="Enter description"
+          variant="outlined"
+          fullWidth
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          className="border border-gray-300 rounded-lg"
+        />
       </div>
-    </div>
+      <div>
+        <TextField
+          label="Enter amount"
+          variant="outlined"
+          fullWidth
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          className="border border-gray-300 rounded-lg"
+        />
+      </div>
+      <div className="flex flex-col gap-2 md:flex-row md:gap-4">
+        <Button
+          variant="contained"
+          color="success"
+          onClick={addTransactionHandler}
+          className="w-full md:w-1/2"
+        >
+          Add Income
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={exTransactionHandler}
+          className="w-full md:w-1/2"
+        >
+          Add Expense
+        </Button>
+      </div>
+    </form>
+  </Box>
   );
 };
 
